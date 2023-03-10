@@ -1,8 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
+import { randomUUID } from 'crypto';
 
-@Injectable()
-export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+export class PaymentService {
+  constructor(@Inject("PAYMENT_RESULT") private client: ClientProxy) {}
+
+  processPayment(): any {
+    console.log("Processing payment")
+    const paymentInfo: any = {
+      timestamp: Date.now(),
+      id: randomUUID(),
+    }
+    this.client.emit("payment_processed", paymentInfo)
+    return paymentInfo;
   }
 }
