@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 public class Receiver {
 
     @RabbitListener(queues = {"payments_result"})
-    public void receiveMessage(PaymentInfo message) {
-        log.info("I'VE RECEIVED A MESSAGE ID {} WITH TIMESTAMP {}", message.id(), message.timestamp());
+    public void receiveMessage(CustomMessage message) {
+        log.info("I'VE RECEIVED A MESSAGE ID {} WITH TIMESTAMP {}", message.data().id(), message.data().timestamp());
     }
 }

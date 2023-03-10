@@ -5,6 +5,6 @@ import java.util.UUID;
 
 public record PaymentInfo(
     UUID id,
-    int timestamp
+    long timestamp
 ) implements Serializable {
 }
